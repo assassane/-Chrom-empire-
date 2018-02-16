@@ -12,6 +12,10 @@ client.on("ready", () => {
 });
 
 client.on("guildMemberAdd", (member) => {
+  newUsers.set(member.id, member.user);
+});
+
+client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   newUsers.set(member.id, member.user);
 
