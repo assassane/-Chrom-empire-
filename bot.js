@@ -4,6 +4,8 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
+const newUsers = new Discord.Collection();
+
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
   client.user.setGame(`on ${client.guilds.size} servers`);
@@ -32,7 +34,7 @@ client.on("message", async message => {
   
   
   if(command === "ping") {
-    const m = await message.channel.send("nop");
+    const m = await message.channel.send("nop 2");
     //m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
   }
   
