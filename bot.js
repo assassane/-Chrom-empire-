@@ -15,6 +15,10 @@ client.on("guildMemberAdd", (member) => {
   newUsers.set(member.id, member.user);
 });
 
+client.on("guildMemberRemove", (member) => {
+  if(newUsers.has(member.id)) newUsers.delete(member.id);
+});
+
 client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   newUsers.set(member.id, member.user);
@@ -22,7 +26,7 @@ client.on("guildMemberAdd", (member) => {
   if (newUsers.size > 10) {
     const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
     const userlist = newUsers.map(u => u.toString()).join(" ");
-    defaultChannel.send("vtff connard, " + userlist);
+    defaultChannel.send("vtff\n" + userlist);
     newUsers.clear();
   }
 });
@@ -38,7 +42,7 @@ client.on("message", async message => {
   
   
   if(command === "ping") {
-    const m = await message.channel.send("nop 2");
+    const m = await message.channel.send("nop 3 owi");
     //m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
   }
   
