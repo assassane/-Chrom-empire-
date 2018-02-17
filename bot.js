@@ -40,19 +40,3 @@ client.on("message", async message => {
 
 });
 client.login(config.token);
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
-  
-  
-  if(command === "ping") {
-    const m = await message.channel.send("arretez avec vos ping");
-    //m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
-  }
-  
-  if(command === "say") {
-    const sayMessage = args.join(" ");
-    message.delete().catch(O_o=>{}); 
-    message.channel.send(sayMessage);
-  }
-});
-client.login(config.token);
