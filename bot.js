@@ -6,29 +6,22 @@ const config = require("./config.json");
 
 const newUsers = new Discord.Collection();
 
+let defChannel;
+let linked = false;
+
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
-  client.user.setGame(`on ${client.guilds.size} servers`);
+  client.user.setActivity(`on ${client.guilds.size} servers`);
 });
 
-client.on("guildMemberAdd", (member) => {
-  newUsers.set(member.id, member.user);
+client.on("guildMemberAdd", (guild, member) => {
+	//let channel = client.channels.get("413750795528568843");
+    defChannel.send(`Bienvenue`);
+    console.log("joined");
 });
 
-client.on("guildMemberRemove", (member) => {
-  if(newUsers.has(member.id)) newUsers.delete(member.id);
-});
-
-client.on("guildMemberAdd", (member) => {
-  const guild = member.guild;
-  newUsers.set(member.id, member.user);
-
-  if (newUsers.size > 10) {
-    const defaultChannel = guild.channels.find(c=> c.permissionsFor(guild.me).has("SEND_MESSAGES"));
-    const userlist = newUsers.map(u => u.toString()).join(" ");
-    defaultChannel.send("vtff\n" + userlist);
-    newUsers.clear();
-  }
+client.on('messageCreate', msg => {
+    console.log("message");
 });
 
 client.on("message", async message => {
@@ -37,6 +30,16 @@ client.on("message", async message => {
   
   if(message.content.indexOf(config.prefix) !== 0) return;
   
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+  
+  if(command === "ping") {
+    const m = await message.channel.send("nop 5");
+    //m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+  }
+
+});
+client.login(config.token);
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
