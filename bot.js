@@ -6,18 +6,21 @@ const config = require("./config.json");
 
 const newUsers = new Discord.Collection();
 
-let defChannel;
-let linked = false;
 
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
   client.user.setActivity(`on ${client.guilds.size} servers`);
 });
 
-client.on("guildMemberAdd", (guild, member) => {
-	//let channel = client.channels.get("413750795528568843");
-    defChannel.send(`Bienvenue`);
-    console.log("joined");
+client.on('guildMemberAdd', member => {
+  // Send the message to a designated channel on a server:
+  const channel = member.guild.channels.get("413750795528568843");
+  console.log('join1');
+  // Do nothing if the channel wasn't found on this server
+  if (!channel) return;
+  // Send the message, mentioning the member
+  channel.send(`Welcome to the server, ${member}`);
+  console.log('join2');
 });
 
 client.on('messageCreate', msg => {
