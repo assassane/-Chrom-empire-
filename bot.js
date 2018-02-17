@@ -45,7 +45,7 @@ client.login(config.token);
   
   
   if(command === "ping") {
-    const m = await message.channel.send("nop 3 owi");
+    const m = await message.channel.send("arretez avec vos ping");
     //m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
   }
   
