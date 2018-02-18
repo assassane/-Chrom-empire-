@@ -13,18 +13,13 @@ client.on("ready", () => {
 });
 
 client.on('guildMemberAdd', member => {
-  // Send the message to a designated channel on a server:
+  
   const channel = member.guild.channels.get("413750795528568843");
-  console.log('join1');
-  // Do nothing if the channel wasn't found on this server
-  if (!channel) return;
-  // Send the message, mentioning the member
-  channel.send(`Welcome to the server, ${member}`);
-  console.log('join2');
-});
 
-client.on('messageCreate', msg => {
-    console.log("message");
+  if (!channel) return;
+  
+  channel.send(`Welcome to the server, ${member}`);
+  
 });
 
 client.on("message", async message => {
